@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #100D10;
+  color: #F5EDE6;
+}
+
+/* Thin, warm-toned scrollbar instead of the default gray one. */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #100D10;
+}
+::-webkit-scrollbar-thumb {
+  background: #2B2529;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8C6E58;
+}
+
+/* Respect reduced-motion preferences site-wide. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible keyboard focus ring, in the rose accent rather than browser blue. */
+:focus-visible {
+  outline: 2px solid #C9967A;
+  outline-offset: 3px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
