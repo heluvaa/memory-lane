@@ -8,37 +8,45 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Warm near-black, not pure black — feels like dusk, not a void.
-        ink: {
-          DEFAULT: "#100D10",
-          soft: "#1B171B",
-          line: "#2B2529",
+        // Soft pink-pastel world — blush background, no near-black anywhere.
+        blossom: {
+          DEFAULT: "#FFEEF2", // page background
+          soft: "#FFF8FA",    // card surfaces
+          card: "#FFFFFF",    // polaroid white
         },
-        // Rose-gold family — the "warm accent" the brief asked for,
-        // kept away from the generic terracotta (#D97757) tell.
-        rose: {
-          DEFAULT: "#C9967A",
-          light: "#E8B4A0",
-          dim: "#8C6E58",
+        pink: {
+          DEFAULT: "#FF8FAB", // primary accent
+          deep: "#E75A7C",    // buttons, active states
+          light: "#FFD1DC",   // tape, chips, borders
         },
-        parchment: {
-          DEFAULT: "#F5EDE6",
-          muted: "#A89A94",
+        plum: {
+          DEFAULT: "#5C3A46", // main text
+          muted: "#9C7C86",   // secondary text
         },
       },
       fontFamily: {
-        // Display serif carries the romantic, handwritten-letter feel.
-        display: ["var(--font-fraunces)", "Georgia", "serif"],
-        // Body sans stays quiet and legible.
-        body: ["var(--font-manrope)", "system-ui", "sans-serif"],
-        // Used sparingly, only for the Roblox-era "system" motif.
-        mono: ["var(--font-jetbrains)", "monospace"],
+        // Big handwritten headline — the "diary/bucin" feel.
+        hand: ["var(--font-caveat)", "cursive"],
+        // Section titles — soft serif, still romantic but readable at small sizes.
+        display: ["var(--font-playfair)", "Georgia", "serif"],
+        // Body copy — rounded, friendly, easy to read.
+        body: ["var(--font-quicksand)", "system-ui", "sans-serif"],
       },
-      letterSpacing: {
-        tightest: "-0.04em",
+      keyframes: {
+        "float-down": {
+          "0%": { transform: "translateY(-10vh) translateX(0) rotate(0deg)", opacity: "0" },
+          "10%": { opacity: "1" },
+          "90%": { opacity: "1" },
+          "100%": { transform: "translateY(110vh) translateX(var(--drift, 40px)) rotate(360deg)", opacity: "0" },
+        },
+        "pulse-soft": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.08)" },
+        },
       },
-      backgroundImage: {
-        "grain": "url('/grain.png')",
+      animation: {
+        "float-down": "float-down linear infinite",
+        "pulse-soft": "pulse-soft 2.4s ease-in-out infinite",
       },
     },
   },

@@ -7,26 +7,24 @@ html {
 }
 
 body {
-  background-color: #100D10;
-  color: #F5EDE6;
+  background-color: #FFEEF2;
+  color: #5C3A46;
 }
 
-/* Thin, warm-toned scrollbar instead of the default gray one. */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #100D10;
+  background: #FFEEF2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2B2529;
+  background: #FFD1DC;
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #8C6E58;
+  background: #FF8FAB;
 }
 
-/* Respect reduced-motion preferences site-wide. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -38,12 +36,20 @@ body {
   }
 }
 
-/* Visible keyboard focus ring, in the rose accent rather than browser blue. */
 :focus-visible {
-  outline: 2px solid #C9967A;
+  outline: 2px solid #E75A7C;
   outline-offset: 3px;
 }
 
 .text-balance {
   text-wrap: balance;
+}
+
+/* One washi-tape look, reused on polaroid corners. */
+.tape {
+  position: absolute;
+  width: 56px;
+  height: 22px;
+  background: rgba(255, 209, 220, 0.85);
+  box-shadow: 0 1px 2px rgba(92, 58, 70, 0.15);
 }

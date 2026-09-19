@@ -1,32 +1,32 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google";
+import { Playfair_Display, Quicksand, Caveat } from "next/font/google";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-fraunces",
+  weight: ["500", "600"],
+  style: ["italic", "normal"],
+  variable: "--font-playfair",
   display: "swap",
 });
 
-const manrope = Manrope({
+const quicksand = Quicksand({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-manrope",
+  variable: "--font-quicksand",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const caveat = Caveat({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-jetbrains",
+  weight: ["500", "600", "700"],
+  variable: "--font-caveat",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Untuk Fayy — Jejak Kita",
-  description: "Sebuah perjalanan kecil menyusuri kenangan kita, sejak pertama kali bertemu.",
+  title: "Untuk Fayy — Kenangan Kita 🌸",
+  description: "Dari satu server Roblox, sampai sejauh ini.",
 };
 
 export default function RootLayout({
@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className={`${fraunces.variable} ${manrope.variable} ${jetbrainsMono.variable}`}>
+    <html lang="id" className={`${playfair.variable} ${quicksand.variable} ${caveat.variable}`}>
       <body className="font-body antialiased">{children}</body>
     </html>
   );

@@ -1,95 +1,79 @@
-# Memory Lane — untuk Fayy
+# Memory Lane — untuk Fayy 🌸
 
-Website kenangan yang dibangun dengan Next.js 14 (App Router), Tailwind CSS, dan Framer Motion.
+Website kenangan bertema pink pastel/bucin, dibangun dengan Next.js 14 (App Router), Tailwind CSS, dan Framer Motion.
 
 ## Struktur proyek
 
 ```
 memory-lane/
 ├── app/
-│   ├── layout.tsx      # Root layout — memuat font (Fraunces, Manrope, JetBrains Mono)
-│   ├── page.tsx        # Menyusun Hero, OurStory, MemoryGallery
-│   └── globals.css     # Reset dasar, scrollbar custom, reduced-motion
+│   ├── layout.tsx        # Root layout — font Playfair Display, Quicksand, Caveat
+│   ├── page.tsx          # Menyusun SiteExperience > Hero, OurStory, LoveNote, MemoryGallery
+│   └── globals.css       # Palet pink, animasi kelopak jatuh, tape decoration
 ├── components/
-│   ├── Hero.tsx         # Hero section dengan animasi masuk
-│   ├── OurStory.tsx      # Seksi "Roblox era"
-│   ├── MemoryGallery.tsx # Grid masonry
-│   ├── MemoryCard.tsx    # Satu kartu foto/video
-│   └── MemoryModal.tsx   # Detail kenangan saat kartu diklik
+│   ├── SiteExperience.tsx  # Gate "Buka Kenangan Kita", tombol musik, bungkus semua section
+│   ├── FloatingHearts.tsx  # Kelopak/hati melayang di background, terus menerus
+│   ├── Hero.tsx            # Judul besar handwriting + CTA
+│   ├── OurStory.tsx        # Cerita awal, dikemas sebagai chat bubble ala Roblox
+│   ├── LoveNote.tsx        # Teks yang muncul pelan-pelan pas discroll
+│   ├── MemoryGallery.tsx   # Susunan polaroid berantakan-tapi-estetik
+│   ├── MemoryCard.tsx      # Satu polaroid foto/video, rotasi acak tapi konsisten
+│   └── MemoryModal.tsx     # Detail kenangan saat polaroid diklik
 ├── data/
-│   └── memories.ts      # Mock data — GANTI dengan foto/video/ceritamu
-└── tailwind.config.ts   # Palet warna & font custom
+│   └── memories.ts        # Mock data — GANTI dengan foto/video/ceritamu
+└── public/
+    └── audio/song.mp3     # ISI SENDIRI — lagu latar (lihat catatan di bawah)
 ```
 
-## Langkah 1 — Buat proyek Next.js
-
-Kalau kamu belum punya proyek Next.js, buat dulu dari nol:
+## Langkah 1 — Buat proyek Next.js (kalau belum ada)
 
 ```bash
 npx create-next-app@latest memory-lane --typescript --tailwind --app --src-dir=false
 cd memory-lane
-```
-
-Saat ditanya, pilih:
-- TypeScript: **Yes**
-- Tailwind CSS: **Yes**
-- App Router: **Yes**
-- `src/` directory: **No**
-
-## Langkah 2 — Salin file-file ini
-
-Salin semua file yang sudah dibuat (`app/`, `components/`, `data/`, `tailwind.config.ts`) ke dalam proyek yang baru dibuat, menimpa file default yang sudah ada.
-
-## Langkah 3 — Install dependency tambahan
-
-```bash
 npm install framer-motion lucide-react
 ```
 
-## Langkah 4 — Siapkan asetmu
+## Langkah 2 — Salin semua file di zip ini ke proyekmu, timpa yang default.
 
-1. Buat folder `public/memories/`.
-2. Masukkan semua foto (`.jpg`/`.png`) dan video (`.mp4`) kalian ke situ.
-3. Untuk setiap video, buat satu gambar still sebagai poster (bisa screenshot frame pertama) — ini yang tampil sebelum video diputar.
+## Langkah 3 — Tambah lagu latar
 
-## Langkah 5 — Isi kenangan sungguhan
+1. Siapkan file musik (`.mp3`), **pastikan kamu punya hak untuk memakainya** — bisa lagu favorit kalian yang kamu beli/download resmi, atau musik bebas royalti dari situs seperti Pixabay Music/YouTube Audio Library.
+2. Simpan sebagai `public/audio/song.mp3`.
+3. Musik akan otomatis diputar begitu Fayy klik tombol "Buka Kenangan Kita" — ini wajib karena browser modern **tidak mengizinkan audio autoplay tanpa interaksi user**, jadi tombol itu sekaligus jadi pemicunya.
+4. Tombol kecil di pojok kanan bawah (ikon speaker) bisa dipakai buat mute/unmute kapan saja.
 
-Buka `data/memories.ts` dan ganti setiap entri:
-- `src` → path ke foto/video di `public/memories/`
-- `title` → judul singkat kenangan
-- `story` → cerita lengkapnya, dengan gaya bahasamu sendiri
-- `date` → tanggal kejadian
-- `layout` → `"tall"`, `"wide"`, atau `"square"`, untuk variasi tinggi kartu di grid
+## Langkah 4 — Isi kenangan sungguhan
 
-Tambah atau kurangi jumlah entri sesuai jumlah kenangan yang kamu punya.
+Buka `data/memories.ts`, ganti tiap entri: `src`, `poster` (khusus video), `title`, `story`, `date`. Tambah/hapus objek sesuai jumlah foto — sudah dites aman untuk 50+ item.
 
-## Langkah 6 — Jalankan secara lokal
+> Untuk 50+ foto: kompres dulu sebelum dimasukkan (TinyPNG dsb.), dan kalau ada video besar, pertimbangkan host di Cloudinary/Mux lalu isi `src` dengan URL-nya, supaya repo & build tetap ringan.
+
+## Langkah 5 — Sesuaikan teks personal
+
+- `components/OurStory.tsx` → ganti paragraf dan isi `chatBubbles` dengan obrolan pertama kalian yang sebenarnya.
+- `components/LoveNote.tsx` → ganti larik `lines` dengan kata-katamu sendiri. Sengaja dibuat terpisah dari lagu (bukan lirik lagu) supaya bebas dipasangkan dengan musik apa pun tanpa masalah hak cipta.
+- `components/Hero.tsx` & `app/layout.tsx` (metadata) → ganti "Fayy" kalau perlu.
+
+## Langkah 6 — Jalankan lokal
 
 ```bash
 npm run dev
 ```
+Buka `http://localhost:3000`.
 
-Buka `http://localhost:3000` di browser.
-
-## Langkah 7 — Sesuaikan detail personal
-
-- Ganti nama "Fayy" di `app/layout.tsx` (metadata) dan `components/Hero.tsx` kalau perlu.
-- Ganti paragraf cerita di `components/OurStory.tsx` dengan kisah kalian yang sebenarnya di Roblox.
-
-## Langkah 8 — Deploy
-
-Cara termudah adalah lewat [Vercel](https://vercel.com):
+## Langkah 7 — Push ke GitHub & deploy ke Vercel
 
 ```bash
-npm install -g vercel
-vercel
+git add .
+git commit -m "update ke tema pink bucin"
+git push
 ```
+Kalau repo sudah terhubung ke Vercel, deploy otomatis jalan setiap kali kamu push.
 
-Ikuti instruksi di terminal, dan websitenya akan online dengan URL publik yang bisa langsung kamu kirim ke Fayy.
+## Catatan desain
 
-## Catatan teknis
-
-- **Palet warna**: near-black hangat (`#100D10`) sebagai dasar, aksen rose-gold (`#C9967A`) — didefinisikan di `tailwind.config.ts` sebagai `ink` dan `rose`, bukan warna Tailwind default, supaya gampang diubah dari satu tempat.
-- **Tipografi**: Fraunces (serif, untuk headline & judul kenangan) dipasangkan dengan Manrope (sans-serif, untuk teks isi), plus JetBrains Mono khusus untuk motif "system log" di seksi Our Story.
-- **Animasi**: transisi kartu ke modal detail memakai `layoutId` Framer Motion, jadi fotonya benar-benar "membesar" ke posisi barunya, bukan sekadar fade. Semua animasi menghormati `prefers-reduced-motion`.
-- **Video besar**: kalau video kalian berukuran besar, pertimbangkan hosting di layanan seperti Cloudinary atau Mux dan ganti `src` di `data/memories.ts` dengan URL-nya, supaya build tetap ringan.
+- **Warna**: latar blush pink (`blossom` di `tailwind.config.ts`), aksen pink tegas (`pink-deep`) untuk tombol/CTA, teks plum gelap supaya tetap kebaca di atas pastel.
+- **Font**: Caveat (handwriting besar untuk judul & caption polaroid), Playfair Display italic (judul section), Quicksand (isi teks).
+- **Polaroid scatter**: rotasi tiap kartu dihitung dari `id`-nya (bukan random murni), jadi tetap konsisten setiap kali halaman dibuka — tidak "meloncat" saat reload.
+- **Kelopak melayang**: dibuat lewat CSS keyframe (`float-down`), murah secara performa walau ada 50+ foto di galeri.
+- Semua animasi tetap menghormati `prefers-reduced-motion`.
